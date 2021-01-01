@@ -1,6 +1,24 @@
 /*
 Author: ableach
 Date: 31/12/20
+
+Usage:
+------
+./guess
+uses default max tries and range
+
+./guess {a}
+./guess {a} {b}
+./guess {a} {b} {c}
+where
+{a} = Max number of tries
+{b} = Low range value
+{c} = High range value
+
+e.g. 
+./guess 5 1 50
+5 tries to guess number between 1 and 50
+
 */
 
 #include <stdio.h>
