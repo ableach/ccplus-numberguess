@@ -11,7 +11,7 @@ Date: 31/12/20
 #define LOWRANGE 1
 #define HIGHRANGE 99
 
-int main() {
+int main(int argc, char *argv[]) {
     /*****************
     * Define variables
     ******************/
@@ -19,6 +19,26 @@ int main() {
     _Bool showSampleData = FALSE;
     _Bool correctGuess = FALSE;
     int guess, guessesRemaining;
+
+    /******************
+    * Handle arguments
+    *******************/
+    int highRange, lowRange, maxTries;
+    if ( argc == 4 ) {
+        highRange = atoi(argv[3]);
+    } else {
+        highRange = HIGHRANGE;
+    }
+    if ( argc >= 3 ) {
+        lowRange = atoi(argv[2]);
+    } else {
+        lowRange = LOWRANGE;
+    }
+    if ( argc >= 2 ) {
+        maxTries = atoi(argv[1]);
+    } else {
+        maxTries = MAXTRIES;
+    }
     
     /***********************
     * Generate random number
@@ -30,7 +50,7 @@ int main() {
     //clock_t ticks = clock();
     //srand((unsigned) ticks);
     
-    int randomNumber = (rand() % (HIGHRANGE - LOWRANGE + 1)) + LOWRANGE; 
+    int randomNumber = (rand() % (highRange - lowRange + 1)) + lowRange; 
     //int randomNumber = rand() % 21;
     //printf("rn=%d\n\n", randomNumber);
     
@@ -39,7 +59,7 @@ int main() {
     ********************/
     if ( showSampleData ) {
         for (int i=0; i<10; i++) {
-            randomNumber = (rand() % (HIGHRANGE - LOWRANGE + 1)) + LOWRANGE; 
+            randomNumber = (rand() % (highRange - lowRange + 1)) + lowRange; 
             printf("rn=%d\n", randomNumber);
         }
     }
@@ -47,10 +67,11 @@ int main() {
     /**************
     * Play the game
     ***************/
-    printf("\nIn this game you have %d tries to guess a number between %d and %d.\n", MAXTRIES, LOWRANGE, HIGHRANGE);
+    printf("\nIn this game you have %d tries to guess a number between %d and %d.\n", maxTries, lowRange, highRange);
     printf("\nPlease enter your guess: ");
-    for ( guessesRemaining = MAXTRIES; guessesRemaining > 0; guessesRemaining-- ) {
-        if ( guessesRemaining < MAXTRIES ) {
+
+    for ( guessesRemaining = maxTries; guessesRemaining > 0; guessesRemaining-- ) {
+        if ( guessesRemaining < maxTries ) {
             printf("You have %d %s remaining. ", guessesRemaining, guessesRemaining == 1 ? "try" : "tries");
             printf("Please try again: ");
         }
